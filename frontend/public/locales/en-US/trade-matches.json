@@ -44,6 +44,9 @@
     "finished": "Finished"
   },
   "viewHistory": "View history",
+  "hideDeclined": "Hide declined",
+  "declinedHidden": "Declined trades hidden.",
+  "errorHidingDeclined": "Error hiding declined trades.",
   "tabCards": "Cards",
   "tabOffers": "Offers",
   "tabMatches": "Matches",

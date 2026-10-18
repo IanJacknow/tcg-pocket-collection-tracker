@@ -47,6 +47,9 @@
     "finished": "Finished"
   },
   "viewHistory": "View history",
+  "hideDeclined": "Ocultar rechazados",
+  "declinedHidden": "Intercambios rechazados ocultados.",
+  "errorHidingDeclined": "Error al ocultar los intercambios rechazados.",
   "tabCards": "Cards",
   "tabOffers": "Offers",
   "tabMatches": "Matches",

@@ -2,10 +2,12 @@ import { useTranslation } from 'react-i18next'
 import ErrorAlert from '@/components/ErrorAlert'
 import { Spinner } from '@/components/Spinner'
 import { Alert } from '@/components/ui/alert.tsx'
-import { groupTrades } from '@/lib/utils'
+import { Button } from '@/components/ui/button.tsx'
+import { toast } from '@/hooks/use-toast.ts'
+import { groupTrades, umami } from '@/lib/utils'
 import TradePartner from '@/pages/trade/components/TradePartner.tsx'
 import { useAccount } from '@/services/account/useAccount'
-import { useActiveTrades } from '@/services/trade/useTrade.ts'
+import { useActiveTrades, useEndTrades } from '@/services/trade/useTrade.ts'
 import type { TradeRow } from '@/types'
 
 function TradeOffers() {
@@ -13,6 +15,7 @@ function TradeOffers() {
 
   const { data: account, isLoading: isLoadingAccount } = useAccount()
   const { data: trades, isLoading: isLoadingTrades } = useActiveTrades()
+  const endTradesMutation = useEndTrades()
 
   if (isLoadingAccount || isLoadingTrades) {
     return <Spinner size="lg" overlay />
@@ -34,6 +37,19 @@ function TradeOffers() {
     return <p>{t('noTradeOffers')}</p>
   }
 
+  const declinedTrades = trades.filter((row) => row.status === 'declined')
+  const hideDeclined = () =>
+    endTradesMutation.mutate(
+      { trades: declinedTrades, userFriendId: account.friend_id as string },
+      {
+        onSuccess: () => {
+          toast({ title: t('declinedHidden'), variant: 'default' })
+          umami('Updated trades: hid declined')
+        },
+        onError: () => toast({ title: t('errorHidingDeclined'), variant: 'destructive' }),
+      },
+    )
+
   //split into two groups for finished and ongoing trades
   const friends = groupTrades(trades, account.friend_id)
   const friendsLastActivity = Object.fromEntries(
@@ -45,6 +61,12 @@ function TradeOffers() {
 
   return (
     <div className="flex flex-col items-center mx-auto gap-4 sm:px-4 mb-12 w-full">
+      <div className="flex w-full justify-end">
+        <Button variant="outline" size="sm" disabled={declinedTrades.length === 0 || endTradesMutation.isPending} onClick={hideDeclined}>
+          {t('hideDeclined')}
+          <span className="ml-2 text-xs px-2 rounded-full bg-neutral-700">{declinedTrades.length}</span>
+        </Button>
+      </div>
       {friendIds.map((friend_id) => (
         <TradePartner key={friend_id} friendId={friend_id} activeTrades={friends[friend_id] as TradeRow[]} />
       ))}

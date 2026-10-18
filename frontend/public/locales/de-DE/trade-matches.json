@@ -36,6 +36,9 @@
     "finished": "Abgeschlossen"
   },
   "viewHistory": "Verlauf ansehen",
+  "hideDeclined": "Abgelehnte verbergen",
+  "declinedHidden": "Abgelehnte Tauschangebote verborgen.",
+  "errorHidingDeclined": "Fehler beim Verbergen der abgelehnten Tauschangebote.",
   "tabCards": "Karten",
   "tabOffers": "Angebote",
   "tabSettings": "Einstellungen",

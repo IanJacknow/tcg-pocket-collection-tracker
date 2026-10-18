@@ -57,6 +57,29 @@ export const insertTrade = async (trade: TradeRow) => {
   return data as TradeRow
 }
 
+// Marks trades as ended for the given user (the per-user "hide" flag), in at most one call per side of the trade.
+export const endTrades = async (trades: TradeRow[], userFriendId: string) => {
+  const now = new Date()
+  const asOfferer = trades.filter((row) => row.offering_friend_id === userFriendId).map((row) => row.id)
+  const asReceiver = trades.filter((row) => row.receiving_friend_id === userFriendId).map((row) => row.id)
+
+  for (const [ids, update] of [
+    [asOfferer, { offerer_ended: true }],
+    [asReceiver, { receiver_ended: true }],
+  ] as const) {
+    if (ids.length === 0) {
+      continue
+    }
+    const { error } = await supabase
+      .from('trades')
+      .update({ ...update, updated_at: now })
+      .in('id', ids)
+    if (error) {
+      throw new Error(`Error hiding trades: ${error.message}`)
+    }
+  }
+}
+
 export const updateTrade = async (id: number, trade: Partial<TradeRow>) => {
   const now = new Date()
   const { data, error } = await supabase

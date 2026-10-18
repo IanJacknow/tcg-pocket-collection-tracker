@@ -41,6 +41,9 @@
     "finished": "Terminé"
   },
   "viewHistory": "Voir l'historique",
+  "hideDeclined": "Masquer les refusés",
+  "declinedHidden": "Échanges refusés masqués.",
+  "errorHidingDeclined": "Erreur lors du masquage des échanges refusés.",
   "tabCards": "Cartes",
   "tabOffers": "Offres",
   "tabMatches": "Correspondances",
