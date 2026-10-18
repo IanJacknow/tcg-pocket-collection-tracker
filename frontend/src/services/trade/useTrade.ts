@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getCardByInternalId } from '@/lib/CardsDB'
 import { supabase } from '@/lib/supabase'
 import { useAccount } from '@/services/account/useAccount.ts'
-import { getActiveTrades, getAllTrades, getTradingPartners, insertTrade, updateTrade } from '@/services/trade/tradeService.ts'
+import { endTrades, getActiveTrades, getAllTrades, getTradingPartners, insertTrade, updateTrade } from '@/services/trade/tradeService.ts'
 import type { GameLanguage, TradeRow } from '@/types'
 
 export function useActiveTrades() {
@@ -79,6 +79,15 @@ export function useUpdateTrade() {
 
   return useMutation({
     mutationFn: ({ id, trade }: { id: number; trade: Partial<TradeRow> }) => updateTrade(id, trade),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['trades'] }),
+  })
+}
+
+export function useEndTrades() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ trades, userFriendId }: { trades: TradeRow[]; userFriendId: string }) => endTrades(trades, userFriendId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['trades'] }),
   })
 }

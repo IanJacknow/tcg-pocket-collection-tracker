@@ -36,6 +36,11 @@
     "finished": "Abgeschlossen"
   },
   "viewHistory": "Verlauf ansehen",
+  "needsAttention": "Wartet auf mich",
+  "hideDeclined": "Abgelehnte verbergen",
+  "declinedHidden": "Abgelehnte Tauschangebote verborgen.",
+  "errorHidingDeclined": "Fehler beim Verbergen der abgelehnten Tauschangebote.",
+  "noTradesNeedAttention": "Alles erledigt. Keine Tauschangebote warten auf dich.",
   "tabCards": "Karten",
   "tabOffers": "Angebote",
   "tabSettings": "Einstellungen",

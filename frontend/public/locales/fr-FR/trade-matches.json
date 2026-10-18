@@ -41,6 +41,11 @@
     "finished": "Terminé"
   },
   "viewHistory": "Voir l'historique",
+  "needsAttention": "Nécessite mon attention",
+  "hideDeclined": "Masquer les refusés",
+  "declinedHidden": "Échanges refusés masqués.",
+  "errorHidingDeclined": "Erreur lors du masquage des échanges refusés.",
+  "noTradesNeedAttention": "Tout est à jour. Aucun échange ne t’attend.",
   "tabCards": "Cartes",
   "tabOffers": "Offres",
   "tabMatches": "Correspondances",

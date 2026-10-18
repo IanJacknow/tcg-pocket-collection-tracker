@@ -41,6 +41,11 @@
     "finished": "Finished"
   },
   "viewHistory": "View history",
+  "needsAttention": "Precisa da minha atenção",
+  "hideDeclined": "Ocultar recusadas",
+  "declinedHidden": "Trocas recusadas ocultadas.",
+  "errorHidingDeclined": "Erro ao ocultar as trocas recusadas.",
+  "noTradesNeedAttention": "Tudo em dia. Nenhuma troca está esperando por você.",
   "tabCards": "Cards",
   "tabOffers": "Offers",
   "tabMatches": "Matches",
